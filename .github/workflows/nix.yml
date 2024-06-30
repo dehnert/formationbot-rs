@@ -39,5 +39,6 @@ jobs:
         run: |
           ls
           ls -l
+          env
           docker load < result
           docker push "$DOCKER_NAME":"$DOCKER_TAG"
