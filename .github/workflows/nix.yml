@@ -37,5 +37,7 @@ jobs:
       - run: nix-build --arg dockerName "\"$DOCKER_NAME\"" --arg dockerTag "\"$DOCKER_TAG\"" -A docker
       - name: Build and publish docker image
         run: |
+          ls
+          ls -l
           docker load < result
           docker push "$DOCKER_NAME":"$DOCKER_TAG"
