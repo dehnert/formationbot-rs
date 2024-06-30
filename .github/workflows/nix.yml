@@ -20,7 +20,7 @@ jobs:
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/container' || startsWith(github.ref, 'refs/tags') # Run only on main or tags
     env:
-      DOCKER_NAME: ghcr.io/${GITHUB_REPOSITORY}/discord-bot
+      DOCKER_NAME: "ghcr.io/${{ github.repository }}/discord-bot"
       DOCKER_TAG: github.ref == 'refs/heads/main' && 'latest' || github.ref == 'refs/heads/container' && 'testing' || 'tag'
     steps:
       - name: Set DOCKER_TAG for tag
