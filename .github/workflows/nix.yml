@@ -34,11 +34,16 @@ jobs:
       - uses: cachix/install-nix-action@v27
         with:
           nix_path: nixpkgs=channel:nixos-23.11
-      - run: nix-build --arg dockerName "\"$DOCKER_NAME\"" --arg dockerTag "\"$DOCKER_TAG\"" -A docker
-      - name: Build and publish docker image
+      - name: Run nix-build
         run: |
+          nix-build --arg dockerName "\"$DOCKER_NAME\"" --arg dockerTag "\"$DOCKER_TAG\"" -A docker
+      - name: Debugging info
+        run: |
+          echo nix-build --arg dockerName "\"$DOCKER_NAME\"" --arg dockerTag "\"$DOCKER_TAG\"" -A docker
           ls
           ls -l
           env
+      - name: Build and publish docker image
+        run: |
           docker load < result
           docker push "$DOCKER_NAME":"$DOCKER_TAG"
